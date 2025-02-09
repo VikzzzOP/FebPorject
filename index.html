@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebee;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .hidden {
+            display: none;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .no-btn {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="startCard">
+        <h2>Open the Card, this is for You <span id="miName"></span> ❤️</h2>
+        <button onclick="openCard()">Open</button>
+    </div>
+    
+    <div class="card hidden" id="valentineCard">
+        <h2>Will you be my Valentine? 💖</h2>
+        <div class="buttons">
+            <button onclick="alert('Yay! ❤️')">Yes</button>
+            <button class="no-btn" id="noBtn" onmouseover="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function openCard() {
+            document.getElementById('startCard').classList.add('hidden');
+            document.getElementById('valentineCard').classList.remove('hidden');
+        }
+
+        function moveNoButton() {
+            let noBtn = document.getElementById('noBtn');
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || 'Mi';
+        }
+
+        document.getElementById('miName').innerText = getQueryParam('name');
+    </script>
+</body>
+</html>
